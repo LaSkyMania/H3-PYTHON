@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail de la ville</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #8e44ad, #9b59b6);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .detail {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #ffffff;
+            color: #2c3e50;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-link:hover {
+            background-color: #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ city.city }} ({{ city.country }})</h1>
+    </header>
+    <main>
+        <p class="detail">Dernière mise à jour : {{ city.last_update }}</p>
+        <a href="{% url 'city_list' %}" class="back-link">← Retour à la liste</a>
+    </main>
+</body>
+</html>

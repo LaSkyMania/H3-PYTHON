@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail du film</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #8e44ad, #9b59b6);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .detail {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #ffffff;
+            color: #2c3e50;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-link:hover {
+            background-color: #ecf0f1;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            text-align: left;
+        }
+        li::before {
+            content: "🎬 ";
+            margin-right: 0.5rem;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+        }
+        li ul {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+        li ul li {
+            margin: 0.5rem 0;
+            color: #ecf0f1;
+        }
+        li ul li:first-child {
+            font-style: italic;
+            color: #bdc3c7;
+        }
+        li a {
+            display: block;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        input[type="text"]::placeholder {
+            color: #bdc3c7;
+        }
+        input[type="text"]:focus::placeholder {
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ film.title }}</h1>
+        <p>{{ film.description }}</p>
+    </header>
+    <main>
+        <input type="text" id="search" placeholder="Rechercher un acteur..." onkeyup="filterActors()">
+        <script>
+            function filterActors() {
+                const input = document.getElementById('search');
+                const filter = input.value.toLowerCase();
+                const films = document.querySelectorAll('li');
+
+                films.forEach(film => {
+                    const title = film.textContent.toLowerCase();
+                    if (title.includes(filter)) {
+                        film.style.display = '';
+                    } else {
+                        film.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+        <p>Acteurs:</p>
+        <ul>
+            {% for actor in film.actors.all %}
+                <li>{{ actor.first_name }} {{ actor.last_name }}</li>
+            {% empty %}
+                <li>-</li>
+            {% endfor %}
+        </ul>
+        <p class="detail">Dernière mise à jour : {{ film.last_update }}</p>
+        <a href="{% url 'film_list' %}" class="back-link">← Retour à la liste</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil - Serveur HITEMA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #2c3e50, #3498db);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .time {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .links a {
+            background-color: white;
+            color: #2c3e50;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur le serveur HITEMA</h1>
+    </header>
+    <div class="container">
+        <p class="time">Heure actuelle : {{ hour }}</p>
+        <div class="links">
+            <a href="/countries">Voir les pays</a>
+            <a href="/cities">Voir les villes</a>
+            <a href="/films">Voir les films</a>
+        </div>
+    </div>
+</body>
+</html>
