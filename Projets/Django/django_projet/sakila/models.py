@@ -1,3 +1,4 @@
+import bcrypt
 from django.db import models
 
 class Country(models.Model):
@@ -70,3 +71,14 @@ class FilmActor(models.Model):
     class Meta:
         db_table = 'film_actor'
         unique_together = ('film', 'actor')
+
+class CustomUser(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=150, unique=True)
+    password = models.CharField(max_length=999999999)  # stocke le hash bcrypt
+
+    class Meta:
+        db_table = 'users'
+
+    def __str__(self):
+        return self.username
